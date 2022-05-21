@@ -101,37 +101,13 @@ abstract class HTMLBuilder {
       html.write(' poster="${htmlEscape.convert(poster)}"');
     }
     // seamless-poster
-    if (seamlessPoster ?? false) {
-      html.write(' seamless-poster');
-    }
-    // loading
-    if (loading != null) {
-      switch (loading) {
-        case Loading.auto:
-          html.write(' loading="auto"');
-          break;
-        case Loading.lazy:
-          html.write(' loading="lazy"');
-          break;
-        case Loading.eager:
-          html.write(' loading="eager"');
-          break;
-      }
-    }
-    // reveal
-    if (reveal != null) {
-      switch (reveal) {
-        case Reveal.auto:
-          html.write(' reveal="auto"');
-          break;
-        case Reveal.interaction:
-          html.write(' reveal="interaction"');
-          break;
-        case Reveal.manual:
-          html.write(' reveal="manual"');
-          break;
-      }
-    }
+    html.writeln(
+        '<style scoped>*{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}</style>');
+    html.write('<model-viewer id="toggle-model"');
+    //去除海报闪烁
+    html.write(' seamless-poster');
+    html.write(' bounds="tight"');
+    html.write(' environment-image="neutral"');
     // with-credentials
     if (withCredentials ?? false) {
       html.write(' with-credentials');
