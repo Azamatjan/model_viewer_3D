@@ -90,6 +90,8 @@ abstract class HTMLBuilder {
     html.write('<model-viewer id="toggle-model"');
     // src
     html.write(' src="${htmlEscape.convert(src)}"');
+
+    html.write(' touch-action="pan-x pan-y"');
     // alt
     if (alt != null) {
       html.write(' alt="${htmlEscape.convert(alt)}"');
