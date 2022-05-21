@@ -88,9 +88,6 @@ abstract class HTMLBuilder {
     html.writeln(
         '<style scoped>*{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}</style>');
     html.write('<model-viewer id="toggle-model"');
-    //去除海报闪烁
-    html.write(' seamless-poster');
-    html.write(' bounds="tight"');
     // src
     html.write(' src="${htmlEscape.convert(src)}"');
     // alt
@@ -383,7 +380,7 @@ abstract class HTMLBuilder {
     }
     html.writeln('<div  slot="poster"></div>');
     html.writeln('<div slot="progress-bar"></div slot="">');
-    html.writeln('<div slot="interaction-prompt"></div>');
+    // html.writeln('<div slot="interaction-prompt"></div>');
     html.writeln('</model-viewer>');
 
     if (relatedJs != null) {
