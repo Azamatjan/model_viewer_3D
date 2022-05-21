@@ -85,13 +85,18 @@ abstract class HTMLBuilder {
     }
 
     final html = StringBuffer(htmlTemplate);
-
-    html.write('<model-viewer');
-
-    // Attributes
-    // Loading Attributes
+    html.writeln(
+        '<style scoped>*{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}</style>');
+    html.write('<model-viewer id="toggle-model"');
+    //去除海报闪烁
+    html.write(' seamless-poster');
+    html.write(' bounds="tight"');
+    html.write(' environment-image="neutral"');
     // src
     html.write(' src="${htmlEscape.convert(src)}"');
+
+    html.write(
+        ' style="background-color: rgb(${backgroundColor.red}, ${backgroundColor.green}, ${backgroundColor.blue});"');
     // alt
     if (alt != null) {
       html.write(' alt="${htmlEscape.convert(alt)}"');
@@ -100,14 +105,7 @@ abstract class HTMLBuilder {
     if (poster != null) {
       html.write(' poster="${htmlEscape.convert(poster)}"');
     }
-    // seamless-poster
-    html.writeln(
-        '<style scoped>*{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}</style>');
-    html.write('<model-viewer id="toggle-model"');
-    //去除海报闪烁
-    html.write(' seamless-poster');
-    html.write(' bounds="tight"');
-    html.write(' environment-image="neutral"');
+
     // with-credentials
     if (withCredentials ?? false) {
       html.write(' with-credentials');
@@ -353,8 +351,6 @@ abstract class HTMLBuilder {
     // Styles
     html.write(' style="');
     // CSS Styles
-    html.write(
-        'background-color: rgba(${backgroundColor.red}, ${backgroundColor.green}, ${backgroundColor.blue}, ${backgroundColor.alpha}); ');
     // Loading CSS
     // --poster-color
     if (posterColor != null) {
