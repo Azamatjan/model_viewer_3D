@@ -91,7 +91,6 @@ abstract class HTMLBuilder {
     // src
     html.write(' src="${htmlEscape.convert(src)}"');
 
-    html.write(' touch-action="pan-x pan-y"');
     // alt
     if (alt != null) {
       html.write(' alt="${htmlEscape.convert(alt)}"');
@@ -168,6 +167,8 @@ abstract class HTMLBuilder {
           html.write(' touch-action="pan-y"');
           break;
       }
+    } else {
+      html.write(' touch-action="pan-x pan-y"');
     }
     // disable-zoom
     if (disableZoom ?? false) {

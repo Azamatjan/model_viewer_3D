@@ -1,12 +1,13 @@
 /* This is free and unencumbered software released into the public domain. */
 
-import 'dart:async' show Completer;
+import 'dart:async' show Completer, unawaited;
 import 'dart:convert' show utf8;
 import 'dart:io'
     show File, HttpRequest, HttpServer, HttpStatus, InternetAddress, Platform;
 import 'dart:typed_data' show Uint8List;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:path/path.dart' as p;
 
 import 'package:flutter/material.dart';
@@ -297,9 +298,13 @@ class ModelViewerState extends State<ModelViewer> {
           break;
 
         case '/model':
+          var src = widget.src;
+          if (widget.openCache ?? false) {
+            src = await _cached3DSrc(widget.src);
+          }
+          final url = Uri.parse(src);
           if (url.isAbsolute && !url.isScheme("file")) {
-            // debugPrint(url.toString());
-            await response.redirect(url); // TODO: proxy the resource
+            await response.redirect(url);
           } else {
             final data = await (url.isScheme("file")
                 ? _readFile(url.path)
@@ -360,5 +365,16 @@ class ModelViewerState extends State<ModelViewer> {
 
   Future<Uint8List> _readFile(final String path) async {
     return await File(path).readAsBytes();
+  }
+
+  Future<String> _cached3DSrc(String source) async {
+    final BaseCacheManager _cacheManager = DefaultCacheManager();
+    final fileInfo = await _cacheManager.getFileFromCache(source);
+    if (fileInfo == null) {
+      unawaited(_cacheManager.downloadFile(source));
+      return source;
+    } else {
+      return "file://" + fileInfo.file.path;
+    }
   }
 }
