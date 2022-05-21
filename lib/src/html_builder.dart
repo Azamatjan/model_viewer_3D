@@ -66,7 +66,7 @@ abstract class HTMLBuilder {
     // CSS Styles
     final Color backgroundColor = Colors.transparent,
     // Loading CSS
-    final Color? posterColor = Colors.transparent,
+    final Color? posterColor,
     // Annotations CSS
     final num? minHotspotOpacity,
     final num? maxHotspotOpacity,
@@ -91,7 +91,6 @@ abstract class HTMLBuilder {
     //去除海报闪烁
     html.write(' seamless-poster');
     html.write(' bounds="tight"');
-    html.write(' environment-image="neutral"');
     // src
     html.write(' src="${htmlEscape.convert(src)}"');
     // alt

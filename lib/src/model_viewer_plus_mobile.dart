@@ -159,14 +159,19 @@ class ModelViewerState extends State<ModelViewer> {
             },
           ),
           Visibility(
-            child: widget.loadingView ??
-                const Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 4.0,
-                    backgroundColor: Colors.blue,
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(color: Colors.black),
+              child: widget.loadingView ??
+                  const Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 4.0,
+                      backgroundColor: Colors.blue,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                    ),
                   ),
-                ),
+            ),
             visible: !loaded,
           )
         ],
