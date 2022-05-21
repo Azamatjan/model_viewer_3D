@@ -66,7 +66,7 @@ abstract class HTMLBuilder {
     // CSS Styles
     final Color backgroundColor = Colors.transparent,
     // Loading CSS
-    final Color? posterColor,
+    final Color? posterColor = Colors.transparent,
     // Annotations CSS
     final num? minHotspotOpacity,
     final num? maxHotspotOpacity,
@@ -94,9 +94,6 @@ abstract class HTMLBuilder {
     html.write(' environment-image="neutral"');
     // src
     html.write(' src="${htmlEscape.convert(src)}"');
-
-    html.write(
-        ' style="background-color: rgb(${backgroundColor.red}, ${backgroundColor.green}, ${backgroundColor.blue});"');
     // alt
     if (alt != null) {
       html.write(' alt="${htmlEscape.convert(alt)}"');
@@ -351,6 +348,8 @@ abstract class HTMLBuilder {
     // Styles
     html.write(' style="');
     // CSS Styles
+    html.write(
+        'background-color: rgba(${backgroundColor.red}, ${backgroundColor.green}, ${backgroundColor.blue}, ${backgroundColor.alpha}); ');
     // Loading CSS
     // --poster-color
     if (posterColor != null) {
