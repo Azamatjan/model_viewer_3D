@@ -381,6 +381,7 @@ abstract class HTMLBuilder {
     if (innerModelViewerHtml != null) {
       html.writeln(innerModelViewerHtml);
     }
+    html.writeln('<div  slot="poster"></div>');
     html.writeln('<div slot="progress-bar"></div slot="">');
     html.writeln('<div slot="interaction-prompt"></div>');
     html.writeln('</model-viewer>');
