@@ -80,6 +80,7 @@ class ModelViewer extends StatefulWidget {
     this.relatedJs,
     this.id,
     this.loadingView,
+    this.openCache,
   }) : super(key: key);
 
   // Loading Attributes
@@ -542,6 +543,9 @@ class ModelViewer extends StatefulWidget {
 
   // Loading CSS
   final Widget? loadingView;
+
+  ///Cache open newtwork file
+  final bool? openCache;
 
   /// Sets the background-color of the poster . You may wish to set this to
   /// transparent if you are using a seamless poster with transparency
